@@ -42,6 +42,11 @@
 		B5308DC42101B39800BC462D /* FeedbackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5308DC32101B39800BC462D /* FeedbackGenerator.swift */; };
 		B5308DC72101B3DD00BC462D /* HLActivityIndicatorView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5308DC62101B3DD00BC462D /* HLActivityIndicatorView.storyboard */; };
 		B5308DC92101B40500BC462D /* HLActivityIndicatorDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5308DC82101B40500BC462D /* HLActivityIndicatorDemoViewController.swift */; };
+		B5308E2D210AC26F00BC462D /* Popover.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5308E2C210AC26F00BC462D /* Popover.swift */; };
+		B5308E30210AC41400BC462D /* PopoverTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5308E2F210AC41400BC462D /* PopoverTestViewController.swift */; };
+		B5308E32210AF12000BC462D /* PopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5308E31210AF12000BC462D /* PopoverController.swift */; };
+		B5308E34210AF15400BC462D /* PopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5308E33210AF15400BC462D /* PopoverView.swift */; };
+		B5308E36210AF7AF00BC462D /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5308E35210AF7AF00BC462D /* AlertView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +111,11 @@
 		B5308DC32101B39800BC462D /* FeedbackGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackGenerator.swift; sourceTree = "<group>"; };
 		B5308DC62101B3DD00BC462D /* HLActivityIndicatorView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HLActivityIndicatorView.storyboard; sourceTree = "<group>"; };
 		B5308DC82101B40500BC462D /* HLActivityIndicatorDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HLActivityIndicatorDemoViewController.swift; sourceTree = "<group>"; };
+		B5308E2C210AC26F00BC462D /* Popover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popover.swift; sourceTree = "<group>"; };
+		B5308E2F210AC41400BC462D /* PopoverTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverTestViewController.swift; sourceTree = "<group>"; };
+		B5308E31210AF12000BC462D /* PopoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverController.swift; sourceTree = "<group>"; };
+		B5308E33210AF15400BC462D /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
+		B5308E35210AF7AF00BC462D /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +158,7 @@
 		B517B03020F5A94B00BB6AA3 /* HLMisc */ = {
 			isa = PBXGroup;
 			children = (
+				B5308E2B210AB8AC00BC462D /* Popover */,
 				B5308DC02101B34E00BC462D /* HLActivityIndicatorView */,
 				B52DD12820F5F269007EEF15 /* SegmentdControl */,
 				B52DD11D20F5F14B007EEF15 /* HLCenterViewController */,
@@ -177,6 +188,7 @@
 				B517B04620F5A9E800BB6AA3 /* AppDelegate.swift */,
 				B517B05620F5AA4500BB6AA3 /* MainTableViewController.swift */,
 				B517B04A20F5A9E800BB6AA3 /* Main.storyboard */,
+				B5308E2E210AC3B900BC462D /* Popover */,
 				B5308DC52101B3B200BC462D /* HLActivityIndicatorView */,
 				B5308DAA2101868E00BC462D /* CenterViewController */,
 				B5308DA52101868700BC462D /* DropDown */,
@@ -280,6 +292,25 @@
 				B5308DC82101B40500BC462D /* HLActivityIndicatorDemoViewController.swift */,
 			);
 			path = HLActivityIndicatorView;
+			sourceTree = "<group>";
+		};
+		B5308E2B210AB8AC00BC462D /* Popover */ = {
+			isa = PBXGroup;
+			children = (
+				B5308E2C210AC26F00BC462D /* Popover.swift */,
+				B5308E31210AF12000BC462D /* PopoverController.swift */,
+				B5308E33210AF15400BC462D /* PopoverView.swift */,
+			);
+			path = Popover;
+			sourceTree = "<group>";
+		};
+		B5308E2E210AC3B900BC462D /* Popover */ = {
+			isa = PBXGroup;
+			children = (
+				B5308E2F210AC41400BC462D /* PopoverTestViewController.swift */,
+				B5308E35210AF7AF00BC462D /* AlertView.swift */,
+			);
+			path = Popover;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,15 +432,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				B517B03E20F5A9B700BB6AA3 /* PopoverAnimator.swift in Sources */,
+				B5308E32210AF12000BC462D /* PopoverController.swift in Sources */,
 				B517B03D20F5A9B700BB6AA3 /* DropDownMenuViewController.swift in Sources */,
 				B5308DC42101B39800BC462D /* FeedbackGenerator.swift in Sources */,
 				B52DD11C20F5EFBC007EEF15 /* EasyLayoutView.swift in Sources */,
+				B5308E2D210AC26F00BC462D /* Popover.swift in Sources */,
 				B52DD11F20F5F15D007EEF15 /* CenterViewController.swift in Sources */,
 				B52DD12120F5F165007EEF15 /* HLPagingHeaderView.swift in Sources */,
 				B517B03F20F5A9B700BB6AA3 /* PopoverPresentationController.swift in Sources */,
 				B5308DC22101B36C00BC462D /* HLActivityIndicatorView.swift in Sources */,
 				B52DD12A20F5F289007EEF15 /* SegmentedControl.swift in Sources */,
 				B52DD10F20F5AFEE007EEF15 /* DateConvert.swift in Sources */,
+				B5308E34210AF15400BC462D /* PopoverView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,11 +455,13 @@
 				B5308DB82101869800BC462D /* DateConvertDemo3ViewController.swift in Sources */,
 				B517B05720F5AA4500BB6AA3 /* MainTableViewController.swift in Sources */,
 				B5308DA92101868700BC462D /* DropDownMenuDemoViewController.swift in Sources */,
+				B5308E30210AC41400BC462D /* PopoverTestViewController.swift in Sources */,
 				B5308DC92101B40500BC462D /* HLActivityIndicatorDemoViewController.swift in Sources */,
 				B517B04720F5A9E800BB6AA3 /* AppDelegate.swift in Sources */,
 				B5308DBB2101869800BC462D /* DateConvertDemoViewController.swift in Sources */,
 				B5308DBF2101879700BC462D /* Tab2CellModel.swift in Sources */,
 				B5308DBA2101869800BC462D /* DateConvertDemo2ViewController.swift in Sources */,
+				B5308E36210AF7AF00BC462D /* AlertView.swift in Sources */,
 				B5308DAE2101868E00BC462D /* ContentTableView.swift in Sources */,
 				B5308DBD2101875D00BC462D /* Tab2Cell.swift in Sources */,
 				B5308DAF2101868E00BC462D /* MyCenterViewController.swift in Sources */,

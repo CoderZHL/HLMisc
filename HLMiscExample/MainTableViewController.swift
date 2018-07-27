@@ -37,6 +37,10 @@ class MainTableViewController: UITableViewController {
             let vc = HLActivityIndicatorDemoViewController.instantiate()
             self.show(vc, sender: nil)
         }))
+        models.append(RowModel(title: "Popover", handler: { [unowned self] in
+            let vc = PopoverTestViewController()
+            self.show(vc, sender: nil)
+        }))
         return models
     }()
 
