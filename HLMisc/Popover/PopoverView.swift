@@ -8,7 +8,21 @@
 
 public protocol PopoverViewProtocol {
     func preferredSize(for popoverView: PopoverView, in controller: PopoverController) -> CGSize
-    var popoverController: PopoverController { get set }
+}
+
+extension PopoverViewProtocol {
+    public var popoverController: PopoverController? {
+        get {
+            return objc_getAssociatedObject(self, &associatedKeys.popoverController) as? PopoverController
+        }
+        set {
+            objc_setAssociatedObject(self, &associatedKeys.popoverController, newValue, .OBJC_ASSOCIATION_ASSIGN)
+        }
+    }
 }
 
 public typealias PopoverView = UIView & PopoverViewProtocol
+
+struct associatedKeys {
+    static var popoverController = "popoverController_associatedKey"
+}

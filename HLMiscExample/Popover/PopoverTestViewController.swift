@@ -10,15 +10,6 @@ import UIKit
 import HLMisc
 
 extension AlertView: PopoverViewProtocol {
-    var popoverController: PopoverController {
-        get {
-            return self.controller
-        }
-        set(newValue) {
-            self.controller = newValue
-        }
-    }
-    
     func preferredSize(for popoverView: PopoverView, in controller: PopoverController) -> CGSize {
         let targetSize = CGSize(width: 300, height: UILayoutFittingExpandedSize.height)
         let size = popoverView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
@@ -77,10 +68,10 @@ extension PopoverTestViewController: TextViewControllerDelegate {
 }
 extension PopoverTestViewController: AlertViewDelegate {
     func didClickCancleButton(alertView: AlertView) {
-        alertView.popoverController.dismiss(animated: true, completion: nil)
+        alertView.popoverController?.dismiss(animated: true, completion: nil)
     }
     func didClickConfirmButton(alertView: AlertView) {
-        alertView.popoverController.dismiss(animated: true, completion: nil)
+        alertView.popoverController?.dismiss(animated: true, completion: nil)
     }
 }
 

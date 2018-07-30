@@ -17,8 +17,6 @@ protocol AlertViewDelegate: class {
 class AlertView: EasyLayoutView {
     weak var delegate: AlertViewDelegate?
     
-    weak var controller: PopoverController!
-    
     init() {
         super.init(frame: .zero)
         self.backgroundColor = .white

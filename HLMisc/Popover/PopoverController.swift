@@ -22,9 +22,6 @@ open class PopoverController: UIViewController {
         self.view.addSubview(self.contentView)
         self.preferredContentSize = size
     }
-    deinit {
-        print(self.self)
-    }
     
     open func show(in viewContoller: UIViewController) {
         self.modalPresentationStyle = .custom
