@@ -8,7 +8,7 @@
 
 ///  html内容视图
 open class HtmlParserView: UIView {
-    public weak var delegate: HtmlParserViewDelegate?
+    private weak var delegate: HtmlParserViewDelegate?
     
     let lineSpacing: CGFloat
     
@@ -30,10 +30,11 @@ open class HtmlParserView: UIView {
     
     var heightConstraintOfButton: [UIButton: NSLayoutConstraint] = [:]
     
-    public init?(contents: [HtmlTextModel], textFontSize: CGFloat = 16, textColor: UIColor? = nil, lineSpacing: CGFloat = 2, emojiSize: CGSize = CGSize(width: 22, height: 22)) {
+    public init?(contents: [HtmlTextModel], textFontSize: CGFloat = 16, textColor: UIColor? = nil, lineSpacing: CGFloat = 2, emojiSize: CGSize = CGSize(width: 22, height: 22), delegate: HtmlParserViewDelegate?) {
         self.textColor = textColor
         self.lineSpacing = lineSpacing
         self.emojiSize = emojiSize
+        self.delegate = delegate
         super.init(frame: .zero)
         
         var views = [UIView]()
