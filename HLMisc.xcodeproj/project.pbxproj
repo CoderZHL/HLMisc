@@ -20,6 +20,8 @@
 		B517B05D20F5AB6000BB6AA3 /* HLMisc.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B517B02E20F5A94B00BB6AA3 /* HLMisc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B51A7690211D249A00D1166A /* HtmlParaser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51A768F211D249A00D1166A /* HtmlParaser.swift */; };
 		B51A7692211D262200D1166A /* HtmlParserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51A7691211D262200D1166A /* HtmlParserView.swift */; };
+		B51A7695211D31F400D1166A /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = B51A7694211D31F400D1166A /* test.html */; };
+		B51A7697211D32D700D1166A /* HTMLParserDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51A7696211D32D700D1166A /* HTMLParserDemoViewController.swift */; };
 		B52DD10F20F5AFEE007EEF15 /* DateConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DD10E20F5AFEE007EEF15 /* DateConvert.swift */; };
 		B52DD11C20F5EFBC007EEF15 /* EasyLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DD11B20F5EFBC007EEF15 /* EasyLayoutView.swift */; };
 		B52DD11F20F5F15D007EEF15 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DD11E20F5F15D007EEF15 /* CenterViewController.swift */; };
@@ -91,6 +93,8 @@
 		B517B05620F5AA4500BB6AA3 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		B51A768F211D249A00D1166A /* HtmlParaser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlParaser.swift; sourceTree = "<group>"; };
 		B51A7691211D262200D1166A /* HtmlParserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlParserView.swift; sourceTree = "<group>"; };
+		B51A7694211D31F400D1166A /* test.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
+		B51A7696211D32D700D1166A /* HTMLParserDemoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLParserDemoViewController.swift; sourceTree = "<group>"; };
 		B52DD10E20F5AFEE007EEF15 /* DateConvert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateConvert.swift; sourceTree = "<group>"; };
 		B52DD11B20F5EFBC007EEF15 /* EasyLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyLayoutView.swift; sourceTree = "<group>"; };
 		B52DD11E20F5F15D007EEF15 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +197,7 @@
 				B517B04620F5A9E800BB6AA3 /* AppDelegate.swift */,
 				B517B05620F5AA4500BB6AA3 /* MainTableViewController.swift */,
 				B517B04A20F5A9E800BB6AA3 /* Main.storyboard */,
+				B51A7693211D31C800D1166A /* HTMLParser */,
 				B5308E2E210AC3B900BC462D /* Popover */,
 				B5308DC52101B3B200BC462D /* HLActivityIndicatorView */,
 				B5308DAA2101868E00BC462D /* CenterViewController */,
@@ -211,6 +216,15 @@
 			children = (
 				B51A768F211D249A00D1166A /* HtmlParaser.swift */,
 				B51A7691211D262200D1166A /* HtmlParserView.swift */,
+			);
+			path = HTMLParser;
+			sourceTree = "<group>";
+		};
+		B51A7693211D31C800D1166A /* HTMLParser */ = {
+			isa = PBXGroup;
+			children = (
+				B51A7694211D31F400D1166A /* test.html */,
+				B51A7696211D32D700D1166A /* HTMLParserDemoViewController.swift */,
 			);
 			path = HTMLParser;
 			sourceTree = "<group>";
@@ -429,6 +443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5308DB92101869800BC462D /* Date.storyboard in Resources */,
+				B51A7695211D31F400D1166A /* test.html in Resources */,
 				B5308DA82101868700BC462D /* DropDownMenu.storyboard in Resources */,
 				B5308DC72101B3DD00BC462D /* HLActivityIndicatorView.storyboard in Resources */,
 				B517B05120F5A9E900BB6AA3 /* LaunchScreen.storyboard in Resources */,
@@ -474,6 +489,7 @@
 				B5308E30210AC41400BC462D /* PopoverTestViewController.swift in Sources */,
 				B5308DC92101B40500BC462D /* HLActivityIndicatorDemoViewController.swift in Sources */,
 				B517B04720F5A9E800BB6AA3 /* AppDelegate.swift in Sources */,
+				B51A7697211D32D700D1166A /* HTMLParserDemoViewController.swift in Sources */,
 				B5308DBB2101869800BC462D /* DateConvertDemoViewController.swift in Sources */,
 				B5308DBF2101879700BC462D /* Tab2CellModel.swift in Sources */,
 				B5308DBA2101869800BC462D /* DateConvertDemo2ViewController.swift in Sources */,

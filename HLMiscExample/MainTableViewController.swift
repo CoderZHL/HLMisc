@@ -41,6 +41,10 @@ class MainTableViewController: UITableViewController {
             let vc = PopoverTestViewController()
             self.show(vc, sender: nil)
         }))
+        models.append(RowModel(title: "HtmlParser", handler: { [unowned self] in
+            let vc = HTMLParserDemoViewController()
+            self.show(vc, sender: nil)
+        }))
         return models
     }()
 
