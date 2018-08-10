@@ -44,7 +44,7 @@ open class HtmlParserView: UIView {
             case .text, .paragraph:
                 if let text = htmlModel.info[.text] {
                     let start = attributedString.length
-                    let newStr = NSAttributedString(string: text)
+                    let newStr = self.delegate?.htmlParserView(self, attributedStringWithContent: text) ?? NSAttributedString(string: text)
                     attributedString.append(newStr)
                     attributedString.addAttributes([.font: UIFont.systemFont(ofSize: textFontSize)], range: NSMakeRange(start, newStr.length))
                 }
