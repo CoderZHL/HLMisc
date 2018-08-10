@@ -107,12 +107,13 @@ open class HtmlParserView: UIView {
         self.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         var constraints: [NSLayoutConstraint] = []
+        let insets = self.delegate?.htmlParserView(self, label: label, edgenInsetsToTopView: topView) ?? .zero
         if let topView = topView {
-            constraints.append(NSLayoutConstraint(item: label, attribute: .top, relatedBy: .equal, toItem: topView, attribute: .bottom, multiplier: 1, constant: self.delegate?.htmlParserView(self, label: label, topMarginToTopView: topView) ?? 15))
+            constraints.append(NSLayoutConstraint(item: label, attribute: .top, relatedBy: .equal, toItem: topView, attribute: .bottom, multiplier: 1, constant: insets.top))
         } else {
-            constraints.append(NSLayoutConstraint(item: label, toItem: self, attribute: .top, multiplier: 1, constant: self.delegate?.htmlParserView(self, label: label, topMarginToTopView: topView) ?? 0))
+            constraints.append(NSLayoutConstraint(item: label, toItem: self, attribute: .top, multiplier: 1, constant: insets.top))
         }
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[label]-0-|", options: .init(rawValue: 0), metrics: nil, views: ["label": label]))
+        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(insets.left)-[label]-\(insets.right)-|", options: .init(rawValue: 0), metrics: nil, views: ["label": label]))
         self.addConstraints(constraints)
     }
     
@@ -131,11 +132,12 @@ open class HtmlParserView: UIView {
         self.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
         var constraints: [NSLayoutConstraint] = []
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-0-[button]-0-|", options: .init(rawValue: 0), metrics: nil, views: ["button": button]))
+        let insets = self.delegate?.htmlParserView(self, imageButton: button, edgenInsetsToTopView: topView) ?? .zero
+        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(insets.left)-[button]-\(insets.right)-|", options: .init(rawValue: 0), metrics: nil, views: ["button": button]))
         if let topView = topView {
-            constraints.append(NSLayoutConstraint(item: button, attribute: .top, relatedBy: .equal, toItem: topView, attribute: .bottom, multiplier: 1, constant: self.delegate?.htmlParserView(self, imageButton: button, topMarginToTopView: topView) ?? 15))
+            constraints.append(NSLayoutConstraint(item: button, attribute: .top, relatedBy: .equal, toItem: topView, attribute: .bottom, multiplier: 1, constant: insets.top))
         } else {
-            constraints.append(NSLayoutConstraint(item: button, toItem: self, attribute: .top, multiplier: 1, constant: self.delegate?.htmlParserView(self, imageButton: button, topMarginToTopView: nil) ?? 0))
+            constraints.append(NSLayoutConstraint(item: button, toItem: self, attribute: .top, multiplier: 1, constant: insets.top))
         }
         let cons = NSLayoutConstraint(item: button, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
         button.addConstraint(cons)
@@ -177,18 +179,24 @@ public protocol HtmlParserViewDelegate: class {
     
     func htmlParserView(_ view: HtmlParserView, setButton button: UIButton, imageURLString: String, completion: @escaping (UIImage?, Error?, URL?) -> Void)
     
-    func htmlParserView(_ view: HtmlParserView, imageButton: UIButton, topMarginToTopView topView: UIView?) -> CGFloat
+    func htmlParserView(_ view: HtmlParserView, imageButton: UIButton, edgenInsetsToTopView topView: UIView?) -> UIEdgeInsets
     
-    func htmlParserView(_ view: HtmlParserView, label: UILabel, topMarginToTopView topView: UIView?) -> CGFloat
+    func htmlParserView(_ view: HtmlParserView, label: UILabel, edgenInsetsToTopView topView: UIView?) -> UIEdgeInsets
+    
+    func htmlParserView(_ view: HtmlParserView, attributedStringWithContent content: String) -> NSAttributedString
 }
 
 extension HtmlParserViewDelegate {
-    func htmlParserView(_ view: HtmlParserView, imageButton: UIButton, topMarginToTopView topView: UIView?) -> CGFloat {
-        return topView == nil ? 0 : 15
+    func htmlParserView(_ view: HtmlParserView, imageButton: UIButton, edgenInsetsToTopView topView: UIView?) -> UIEdgeInsets {
+        return topView == nil ? UIEdgeInsets.zero : UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
     }
     
-    func htmlParserView(_ view: HtmlParserView, label: UILabel, topMarginToTopView topView: UIView?) -> CGFloat {
-        return topView == nil ? 0 : 15
+    func htmlParserView(_ view: HtmlParserView, label: UILabel, edgenInsetsToTopView topView: UIView?) -> UIEdgeInsets {
+        return topView == nil ? UIEdgeInsets.zero : UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
+    }
+    
+    func htmlParserView(_ view: HtmlParserView, attributedStringWithContent content: String) -> NSAttributedString {
+        return NSAttributedString(string: content)
     }
 }
 

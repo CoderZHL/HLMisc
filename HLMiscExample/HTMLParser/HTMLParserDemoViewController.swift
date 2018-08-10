@@ -21,7 +21,7 @@ class HTMLParserDemoViewController: UIViewController {
         print(htmlContent)
         
         let textModels = HtmlParser.shared.parser(html: htmlContent, isRemoveContinuouslyNewLine: true)
-        if let contentView = HtmlParserView(contents: textModels) {
+        if let contentView = HtmlParserView(contents: textModels, delegate: nil) {
             self.view.addSubview(contentView)
             contentView.translatesAutoresizingMaskIntoConstraints = false
             
