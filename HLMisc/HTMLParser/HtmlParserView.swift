@@ -162,7 +162,7 @@ extension HtmlParserView: ImageButtonDelegate {
         }
     }
     
-    fileprivate func imageButton(_ button: ImageButton, setImageURLString string: String, completion: (UIImage?, Error?, URL?) -> Void) {
+    fileprivate func imageButton(_ button: ImageButton, setImageURLString string: String, completion: @escaping (UIImage?, Error?, URL?) -> Void) {
         self.delegate?.htmlParserView(self, setButton: button, imageURLString: string, completion: completion)
     }
 }
@@ -174,7 +174,7 @@ public protocol HtmlParserViewDelegate: class {
     
     func htmlParserView(_ view: HtmlParserView, onTapImage imageURL: URL?)
     
-    func htmlParserView(_ view: HtmlParserView, setButton button: UIButton, imageURLString: String, completion: (UIImage?, Error?, URL?) -> Void)
+    func htmlParserView(_ view: HtmlParserView, setButton button: UIButton, imageURLString: String, completion: @escaping (UIImage?, Error?, URL?) -> Void)
     
     func htmlParserView(_ view: HtmlParserView, imageButton: UIButton, topMarginToTopView topView: UIView?) -> CGFloat
     
@@ -229,7 +229,7 @@ fileprivate protocol ImageButtonDelegate: class {
     
     func onTapImageButton(_ button: ImageButton)
     
-    func imageButton(_ button: ImageButton, setImageURLString string: String, completion: (UIImage?, Error?, URL?) -> Void)
+    func imageButton(_ button: ImageButton, setImageURLString string: String, completion: @escaping (UIImage?, Error?, URL?) -> Void)
 }
 
 extension Selector {
