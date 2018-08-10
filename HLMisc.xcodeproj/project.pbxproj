@@ -18,6 +18,8 @@
 		B517B05720F5AA4500BB6AA3 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B517B05620F5AA4500BB6AA3 /* MainTableViewController.swift */; };
 		B517B05C20F5AB6000BB6AA3 /* HLMisc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B517B02E20F5A94B00BB6AA3 /* HLMisc.framework */; };
 		B517B05D20F5AB6000BB6AA3 /* HLMisc.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B517B02E20F5A94B00BB6AA3 /* HLMisc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B51A7690211D249A00D1166A /* HtmlParaser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51A768F211D249A00D1166A /* HtmlParaser.swift */; };
+		B51A7692211D262200D1166A /* HtmlParserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51A7691211D262200D1166A /* HtmlParserView.swift */; };
 		B52DD10F20F5AFEE007EEF15 /* DateConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DD10E20F5AFEE007EEF15 /* DateConvert.swift */; };
 		B52DD11C20F5EFBC007EEF15 /* EasyLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DD11B20F5EFBC007EEF15 /* EasyLayoutView.swift */; };
 		B52DD11F20F5F15D007EEF15 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DD11E20F5F15D007EEF15 /* CenterViewController.swift */; };
@@ -87,6 +89,8 @@
 		B517B05020F5A9E900BB6AA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B517B05220F5A9E900BB6AA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B517B05620F5AA4500BB6AA3 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		B51A768F211D249A00D1166A /* HtmlParaser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlParaser.swift; sourceTree = "<group>"; };
+		B51A7691211D262200D1166A /* HtmlParserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlParserView.swift; sourceTree = "<group>"; };
 		B52DD10E20F5AFEE007EEF15 /* DateConvert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateConvert.swift; sourceTree = "<group>"; };
 		B52DD11B20F5EFBC007EEF15 /* EasyLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyLayoutView.swift; sourceTree = "<group>"; };
 		B52DD11E20F5F15D007EEF15 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 		B517B03020F5A94B00BB6AA3 /* HLMisc */ = {
 			isa = PBXGroup;
 			children = (
+				B51A768E211D247900D1166A /* HTMLParser */,
 				B5308E2B210AB8AC00BC462D /* Popover */,
 				B5308DC02101B34E00BC462D /* HLActivityIndicatorView */,
 				B52DD12820F5F269007EEF15 /* SegmentdControl */,
@@ -199,6 +204,15 @@
 				B517B05220F5A9E900BB6AA3 /* Info.plist */,
 			);
 			path = HLMiscExample;
+			sourceTree = "<group>";
+		};
+		B51A768E211D247900D1166A /* HTMLParser */ = {
+			isa = PBXGroup;
+			children = (
+				B51A768F211D249A00D1166A /* HtmlParaser.swift */,
+				B51A7691211D262200D1166A /* HtmlParserView.swift */,
+			);
+			path = HTMLParser;
 			sourceTree = "<group>";
 		};
 		B52DD10D20F5AFB7007EEF15 /* Date */ = {
@@ -433,11 +447,13 @@
 			files = (
 				B517B03E20F5A9B700BB6AA3 /* PopoverAnimator.swift in Sources */,
 				B5308E32210AF12000BC462D /* PopoverController.swift in Sources */,
+				B51A7692211D262200D1166A /* HtmlParserView.swift in Sources */,
 				B517B03D20F5A9B700BB6AA3 /* DropDownMenuViewController.swift in Sources */,
 				B5308DC42101B39800BC462D /* FeedbackGenerator.swift in Sources */,
 				B52DD11C20F5EFBC007EEF15 /* EasyLayoutView.swift in Sources */,
 				B5308E2D210AC26F00BC462D /* Popover.swift in Sources */,
 				B52DD11F20F5F15D007EEF15 /* CenterViewController.swift in Sources */,
+				B51A7690211D249A00D1166A /* HtmlParaser.swift in Sources */,
 				B52DD12120F5F165007EEF15 /* HLPagingHeaderView.swift in Sources */,
 				B517B03F20F5A9B700BB6AA3 /* PopoverPresentationController.swift in Sources */,
 				B5308DC22101B36C00BC462D /* HLActivityIndicatorView.swift in Sources */,
