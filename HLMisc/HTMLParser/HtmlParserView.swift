@@ -9,6 +9,8 @@
 ///  html内容视图
 open class HtmlParserView: UIView {
     private weak var delegate: HtmlParserViewDelegate?
+    /// 是否代码计算图片尺寸，当图片加载完成的时候
+    public var calculateImageSizeWhenDidLoad = true
     
     public var lineSpacing: CGFloat {
         return self._lineSpacing
@@ -169,15 +171,20 @@ extension HtmlParserView: ImageButtonDelegate {
     }
     
     fileprivate func didLoadImage(imageButton button: ImageButton) {
-        // 按钮高度没有根据图片尺寸来正确布局尺寸，所以需要代码计算。原因未知
-        DispatchQueue.main.async {
-            if let image = button.imageView?.image, let cons = self.heightConstraintOfButton[button] {
-                if image.size.width > button.frame.width {
-                    cons.constant = image.size.height / image.size.width * button.frame.width
-                } else {
-                    cons.constant = image.size.height
+        if self.calculateImageSizeWhenDidLoad {
+            // 按钮高度没有根据图片尺寸来正确布局尺寸，所以需要代码计算。原因未知
+            DispatchQueue.main.async {
+                if let image = button.imageView?.image, let cons = self.heightConstraintOfButton[button] {
+                    if image.size.width > button.frame.width {
+                        cons.constant = image.size.height / image.size.width * button.frame.width
+                    } else {
+                        cons.constant = image.size.height
+                    }
                 }
+                
+                self.delegate?.didLoadImages(HtmlParserView: self)
             }
+        } else {
             self.delegate?.didLoadImages(HtmlParserView: self)
         }
     }
