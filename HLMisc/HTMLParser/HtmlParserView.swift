@@ -10,11 +10,17 @@
 open class HtmlParserView: UIView {
     private weak var delegate: HtmlParserViewDelegate?
     
-    let lineSpacing: CGFloat
+    public var lineSpacing: CGFloat {
+        return self._lineSpacing
+    }
     
-    let emojiSize: CGSize
+    public var emojiSize: CGSize {
+        return self._emojiSize
+    }
     
-    let textColor: UIColor?
+    public var textColor: UIColor? {
+        return self._textColor
+    }
     
     public var imageURLs: [URL] {
         return self.subviews.reduce([], { (result, view) -> [URL] in
@@ -34,12 +40,16 @@ open class HtmlParserView: UIView {
     
     private var _identifier: String
     
+    private var _lineSpacing: CGFloat
+    private var _emojiSize: CGSize
+    private var _textColor: UIColor?
+    
     var heightConstraintOfButton: [UIButton: NSLayoutConstraint] = [:]
     
     public init?(contents: [HtmlTextModel], textFontSize: CGFloat = 16, textColor: UIColor? = nil, lineSpacing: CGFloat = 2, emojiSize: CGSize = CGSize(width: 22, height: 22), delegate: HtmlParserViewDelegate?, identifier: String) {
-        self.textColor = textColor
-        self.lineSpacing = lineSpacing
-        self.emojiSize = emojiSize
+        self._textColor = textColor
+        self._lineSpacing = lineSpacing
+        self._emojiSize = emojiSize
         self.delegate = delegate
         self._identifier = identifier
         super.init(frame: .zero)
