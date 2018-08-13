@@ -28,13 +28,20 @@ open class HtmlParserView: UIView {
         })
     }
     
+    public var identifier: String {
+        return self._identifier
+    }
+    
+    private var _identifier: String
+    
     var heightConstraintOfButton: [UIButton: NSLayoutConstraint] = [:]
     
-    public init?(contents: [HtmlTextModel], textFontSize: CGFloat = 16, textColor: UIColor? = nil, lineSpacing: CGFloat = 2, emojiSize: CGSize = CGSize(width: 22, height: 22), delegate: HtmlParserViewDelegate?) {
+    public init?(contents: [HtmlTextModel], textFontSize: CGFloat = 16, textColor: UIColor? = nil, lineSpacing: CGFloat = 2, emojiSize: CGSize = CGSize(width: 22, height: 22), delegate: HtmlParserViewDelegate?, identifier: String) {
         self.textColor = textColor
         self.lineSpacing = lineSpacing
         self.emojiSize = emojiSize
         self.delegate = delegate
+        self._identifier = identifier
         super.init(frame: .zero)
         
         var views = [UIView]()
