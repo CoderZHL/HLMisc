@@ -157,10 +157,7 @@ extension HtmlParserView: ImageButtonDelegate {
                         cons.constant = image.size.height
                     }
                 }
-                self.delegate.didLoadImages(HtmlParserView: self)
             }
-        } else {
-            self.delegate.didLoadImages(HtmlParserView: self)
         }
     }
     
@@ -174,8 +171,6 @@ extension HtmlParserView: ImageButtonDelegate {
 }
 
 extension HtmlParserView: HtmlParserViewDelegate {
-    public func didLoadImages(HtmlParserView view: HtmlParserView) {}
-    
     public func htmlParserView(_ view: HtmlParserView, onTapImage imageURL: URL?) {}
     
     public func htmlParserView(_ view: HtmlParserView, setButton button: UIButton, imageURLString: String, completion: @escaping (UIImage?, Error?, URL?) -> Void) {}
@@ -204,8 +199,6 @@ extension HtmlParserView: HtmlParserViewDelegate {
 // MARK: - HtmlParserViewDelegate
 
 public protocol HtmlParserViewDelegate: class {
-    func didLoadImages(HtmlParserView view: HtmlParserView)
-    
     func htmlParserView(_ view: HtmlParserView, onTapImage imageURL: URL?)
     
     func htmlParserView(_ view: HtmlParserView, setButton button: UIButton, imageURLString: String, completion: @escaping (UIImage?, Error?, URL?) -> Void)
