@@ -132,9 +132,11 @@ open class HtmlParserView: UIView {
         } else {
             constraints.append(NSLayoutConstraint(item: button, toItem: self, attribute: .top, multiplier: 1, constant: insets.top))
         }
-        let cons = NSLayoutConstraint(item: button, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
-        button.addConstraint(cons)
-        self.heightConstraintOfButton[button] = cons
+        if self.calculateImageSizeWhenDidLoad {
+            let cons = NSLayoutConstraint(item: button, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
+            button.addConstraint(cons)
+            self.heightConstraintOfButton[button] = cons
+        }
         self.addConstraints(constraints)
     }
 }
@@ -145,17 +147,15 @@ extension HtmlParserView: ImageButtonDelegate {
     }
     
     fileprivate func didLoadImage(imageButton button: ImageButton) {
-        if self.calculateImageSizeWhenDidLoad {
-            // 按钮高度没有根据图片尺寸来正确布局尺寸，所以需要代码计算。原因未知
+        if let cons = self.heightConstraintOfButton[button] {
             DispatchQueue.main.async {
-                if let image = button.imageView?.image, let cons = self.heightConstraintOfButton[button] {
+                if let image = button.imageView?.image {
                     if image.size.width > button.frame.width {
                         cons.constant = image.size.height / image.size.width * button.frame.width
                     } else {
                         cons.constant = image.size.height
                     }
                 }
-                
                 self.delegate.didLoadImages(HtmlParserView: self)
             }
         } else {
