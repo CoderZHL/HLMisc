@@ -10,7 +10,7 @@
 open class HtmlParserView: UIView {
     private weak var delegate: HtmlParserViewDelegate!
     /// 是否代码计算图片尺寸，当图片加载完成的时候
-    public var calculateImageSizeWhenDidLoad = true
+    private var _calculateImageSizeWhenDidLoad: Bool
     
     public var imageURLs: [URL] {
         return self.subviews.reduce([], { (result, view) -> [URL] in
@@ -32,8 +32,9 @@ open class HtmlParserView: UIView {
     
     var heightConstraintOfButton: [UIButton: NSLayoutConstraint] = [:]
     
-    public init?(contents: [HtmlTextModel], delegate: HtmlParserViewDelegate?, identifier: String) {
+    public init?(contents: [HtmlTextModel], calculateImageSizeWhenDidLoad: Bool = true, delegate: HtmlParserViewDelegate?, identifier: String) {
         self._identifier = identifier
+        self._calculateImageSizeWhenDidLoad = calculateImageSizeWhenDidLoad
         super.init(frame: .zero)
         self.delegate = delegate ?? self
         
@@ -132,7 +133,7 @@ open class HtmlParserView: UIView {
         } else {
             constraints.append(NSLayoutConstraint(item: button, toItem: self, attribute: .top, multiplier: 1, constant: insets.top))
         }
-        if self.calculateImageSizeWhenDidLoad {
+        if self._calculateImageSizeWhenDidLoad {
             let cons = NSLayoutConstraint(item: button, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
             button.addConstraint(cons)
             self.heightConstraintOfButton[button] = cons
