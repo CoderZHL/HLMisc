@@ -43,7 +43,7 @@ public class HLActivityIndicatorView: UIView {
         }
     }
     
-    var isAlphaOffset: Bool = false {
+    public var isAlphaOffset: Bool = false {
         didSet {
             if self.isAlphaOffset != oldValue {
                 self.setup(percent: self.currentPrecent, isAlphaOffset: isAlphaOffset)
@@ -51,7 +51,7 @@ public class HLActivityIndicatorView: UIView {
         }
     }
     
-    var isAutoStartAnimation: Bool = true
+    public var isAutoStartAnimation: Bool = true
     
     private var _isStopAnimation: Bool = false {
         didSet {
@@ -75,7 +75,7 @@ public class HLActivityIndicatorView: UIView {
     
     
     
-    func startAnimating() {
+    public func startAnimating() {
         if self.isAnimating { return }
         self.setup(percent: 1.0, isAlphaOffset: true)
         self.isAnimating = true
@@ -84,7 +84,7 @@ public class HLActivityIndicatorView: UIView {
         impactFeedback(style: .medium)
     }
     
-    func stopAnimating() {
+    public func stopAnimating() {
         if !self._isStopAnimation {
             self._isStopAnimation = true
         }
