@@ -18,6 +18,7 @@ class HLActivityIndicatorDemoViewController: UIViewController {
         
         self.indicatorView.backgroundColor = nil
         self.indicatorView.color = UIColor.brown
+        self.indicatorView.delegate = self
     }
 
 }
@@ -33,4 +34,25 @@ extension HLActivityIndicatorDemoViewController {
         let vc = UIStoryboard(name: "HLActivityIndicatorView", bundle: nil).instantiateViewController(withIdentifier: "HLActivityIndicatorDemoViewController") as! HLActivityIndicatorDemoViewController
         return vc
     }
+}
+
+extension HLActivityIndicatorDemoViewController: HLActivityIndicatorViewDelegate {
+    func startAnimating(activityIndicatorView: HLActivityIndicatorView) {
+        var inset = self.scrollView.contentInset
+        inset.top += 50
+        self.scrollView.contentInset = inset
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.indicatorView.stopAnimating(topInset: 50)
+        }
+    }
+    
+    func stopAnimating(activityIndicatorView: HLActivityIndicatorView) {
+        var inset = self.scrollView.contentInset
+        inset.top -= 50
+        self.scrollView.contentInset = inset
+    }
+    
+    
 }

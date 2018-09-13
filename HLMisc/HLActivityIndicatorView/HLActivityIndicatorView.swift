@@ -19,6 +19,8 @@ public class HLActivityIndicatorView: UIView {
     public var color: UIColor = UIColor.white
     
     public var isAnimating: Bool = false
+    
+    public var animationDuration: CFTimeInterval = 0.8
 
     var percent: CGFloat = 1.0 {
         didSet {
@@ -65,6 +67,14 @@ public class HLActivityIndicatorView: UIView {
     
     private var segmentCount = 12
     
+    private var topInset: CGFloat = 0 {
+        didSet {
+            self.percent = self.calculatePercent(with: self.offsetCache)
+        }
+    }
+    
+    private var offsetCache: CGFloat = 0
+    
     override public init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -84,8 +94,9 @@ public class HLActivityIndicatorView: UIView {
         impactFeedback(style: .medium)
     }
     
-    public func stopAnimating() {
+    public func stopAnimating(topInset: CGFloat = 0) {
         if !self._isStopAnimation {
+            self.topInset = topInset
             self._isStopAnimation = true
         }
     }
@@ -103,6 +114,7 @@ extension HLActivityIndicatorView {
                 self.setup(percent: 0.0, isAlphaOffset: false)
                 self.layer.removeAllAnimations()
                 self.delegate?.stopAnimating(activityIndicatorView: self)
+                self.topInset = 0
             })
         }
     }
@@ -173,7 +185,7 @@ extension HLActivityIndicatorView {
         let x = (layer.bounds.size.width - size.width) / 2
         let y = (layer.bounds.size.height - size.height) / 2
         let count = segmentCount
-        let duration: CFTimeInterval = 1.2
+        let duration: CFTimeInterval = self.animationDuration
         let beginTime = CACurrentMediaTime()
         let interval: CFTimeInterval = 1 / CFTimeInterval(count)
         let beginTimes = (1...12).map { (index) -> CFTimeInterval in
@@ -258,12 +270,18 @@ extension HLActivityIndicatorView {
     }
     
     func updatePercent(with viewOffset: CGFloat, maxPercent: CGFloat) {
-        let percent = min(max(-1 * (viewOffset + 20), 0) / 100, maxPercent)
+        let percent = min(self.calculatePercent(with: viewOffset), maxPercent)
         self.percent = percent
         
         let isHidden = viewOffset > 20
         if self.isHidden != isHidden {
             self.isHidden = isHidden
         }
+        self.offsetCache = viewOffset
+    }
+    
+    private func calculatePercent(with viewOffset: CGFloat) -> CGFloat {
+        let percent = min(max(-1 * (viewOffset + self.topInset + 20), 0) / 100, 1)
+        return percent
     }
 }
