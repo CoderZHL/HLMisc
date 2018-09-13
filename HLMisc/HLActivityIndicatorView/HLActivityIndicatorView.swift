@@ -105,15 +105,16 @@ public class HLActivityIndicatorView: UIView {
 extension HLActivityIndicatorView {
     private func stopAnimationIfNeed() {
         guard isAnimating else {
+            self.topInset = 0
             return
         }
         if self._isStopAnimation && self.percent < 0.1 {
+            self.topInset = 0
             self._isStopAnimation = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.isAnimating = false
                 self.setup(percent: 0.0, isAlphaOffset: false)
                 self.layer.removeAllAnimations()
-                self.topInset = 0
                 self.delegate?.stopAnimating(activityIndicatorView: self)
             })
         }
@@ -196,9 +197,13 @@ extension HLActivityIndicatorView {
         // Animation
         let animation = CAKeyframeAnimation(keyPath: "opacity")
         
-        animation.keyTimes = [0, 0.33, 0.66, 1]
+        let valueInterval: CGFloat = 1 / max(CGFloat(segmentCount - 1), 1)
+        let keyTimes = (0...count).map({ CGFloat($0) * valueInterval })
+        animation.keyTimes = keyTimes as [NSNumber]
         animation.timingFunctions = [timingFunction, timingFunction]
-        animation.values = [1, 0.33, 0.66, 1]
+        var values = keyTimes
+        values[0] = 1
+        animation.values = values
         animation.duration = duration
         animation.repeatCount = HUGE
         animation.isRemovedOnCompletion = false
