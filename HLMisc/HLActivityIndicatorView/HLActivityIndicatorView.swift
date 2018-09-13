@@ -184,9 +184,9 @@ extension HLActivityIndicatorView {
         // Animation
         let animation = CAKeyframeAnimation(keyPath: "opacity")
         
-        animation.keyTimes = [0, 0.5, 1]
+        animation.keyTimes = [0, 0.33, 0.66, 1]
         animation.timingFunctions = [timingFunction, timingFunction]
-        animation.values = [1, 0.3, 1]
+        animation.values = [1, 0.33, 0.66, 1]
         animation.duration = duration
         animation.repeatCount = HUGE
         animation.isRemovedOnCompletion = false
