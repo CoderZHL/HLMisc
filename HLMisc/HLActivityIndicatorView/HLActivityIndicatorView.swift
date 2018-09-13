@@ -81,7 +81,7 @@ public class HLActivityIndicatorView: UIView {
         self.isAnimating = true
         self.setupAnimation()
         self.delegate?.startAnimating(activityIndicatorView: self)
-        impactFeedback(style: .light)
+        impactFeedback(style: .medium)
     }
     
     func stopAnimating() {
@@ -119,11 +119,13 @@ extension HLActivityIndicatorView {
             return
         }
         
-        let count = segmentCount
-        let diameter = min(self.bounds.size.width, self.bounds.size.height)
-        let scale: CGFloat = 25.0 / 100.0
-        let height = diameter * scale
-        let width = (diameter - height * 2) / 2 * tan(CGFloat.pi * 360.0 / CGFloat(count) / 180.0) - 2
+        let parameter = self.circleParameter()
+        let count = parameter.segmentCount
+        let diameter = parameter.diameter
+        let layerSize = parameter.lineLayerSize
+        let scale = parameter.heightScale
+        let height = layerSize.height
+        let width = layerSize.width
         
         let angel = 360.0 / CGFloat(count)
         for i in 0 ..< count {
@@ -148,13 +150,94 @@ extension HLActivityIndicatorView {
     }
     
     private func setupAnimation() {
-        let animation = CABasicAnimation()
-        animation.keyPath = "transform.rotation"
-        animation.fromValue = 0
-        animation.toValue = CGFloat.pi * 2
-        animation.repeatCount = Float.greatestFiniteMagnitude
-        animation.duration = 2.5
-        self.layer.add(animation, forKey: nil)
+        self.layer.sublayers?.forEach({ $0.removeFromSuperlayer() })
+        self.setUpAnimation(in: self.layer, size: self.bounds.size, color: self.color, segmentCount: self.segmentCount)
+    }
+}
+
+extension HLActivityIndicatorView {
+    private func circleParameter() -> (segmentCount: Int, diameter: CGFloat, lineLayerSize: CGSize, heightScale: CGFloat) {
+        let count = self.segmentCount
+        let diameter = min(self.bounds.size.width, self.bounds.size.height)
+        let scale: CGFloat = 25.0 / 100.0
+        let height = diameter * scale
+        let width = (diameter - height * 2) / 2 * tan(CGFloat.pi * 360.0 / CGFloat(count) / 180.0) - 2
+        return (segmentCount: count, diameter: diameter, lineLayerSize: CGSize(width: width, height: height), heightScale: scale)
+    }
+}
+
+extension HLActivityIndicatorView {
+    private func setUpAnimation(in layer: CALayer, size: CGSize, color: UIColor, segmentCount: Int) {
+        let parameter = self.circleParameter()
+        let lineSize = parameter.lineLayerSize
+        let x = (layer.bounds.size.width - size.width) / 2
+        let y = (layer.bounds.size.height - size.height) / 2
+        let count = segmentCount
+        let duration: CFTimeInterval = 1.2
+        let beginTime = CACurrentMediaTime()
+        let interval: CFTimeInterval = 1 / CFTimeInterval(count)
+        let beginTimes = (1...12).map { (index) -> CFTimeInterval in
+            return CFTimeInterval(index) * interval
+        }
+        let timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        
+        // Animation
+        let animation = CAKeyframeAnimation(keyPath: "opacity")
+        
+        animation.keyTimes = [0, 0.5, 1]
+        animation.timingFunctions = [timingFunction, timingFunction]
+        animation.values = [1, 0.3, 1]
+        animation.duration = duration
+        animation.repeatCount = HUGE
+        animation.isRemovedOnCompletion = false
+        
+        // Draw lines
+        for i in 0 ..< count {
+            let line = lineAt(angle: CGFloat(Double.pi / Double(count) * 2 * Double(i)),
+                              size: lineSize,
+                              origin: CGPoint(x: x, y: y),
+                              containerSize: size,
+                              color: color)
+            
+            animation.beginTime = beginTime + beginTimes[i]
+            line.add(animation, forKey: "animation")
+            layer.addSublayer(line)
+        }
+    }
+    
+    private func lineAt(angle: CGFloat, size: CGSize, origin: CGPoint, containerSize: CGSize, color: UIColor) -> CALayer {
+        let radius = containerSize.width / 2 - max(size.width, size.height) / 2
+        let lineContainerSize = CGSize(width: max(size.width, size.height), height: max(size.width, size.height))
+        let lineContainer = CALayer()
+        let lineContainerFrame = CGRect(
+            x: origin.x + radius * (cos(angle) + 1),
+            y: origin.y + radius * (sin(angle) + 1),
+            width: lineContainerSize.width,
+            height: lineContainerSize.height)
+        let line = self.layerWith(size: size, color: color)
+        let lineFrame = CGRect(
+            x: (lineContainerSize.width - size.width) / 2,
+            y: (lineContainerSize.height - size.height) / 2,
+            width: size.width,
+            height: size.height)
+        
+        lineContainer.frame = lineContainerFrame
+        line.frame = lineFrame
+        lineContainer.addSublayer(line)
+        lineContainer.sublayerTransform = CATransform3DMakeRotation(CGFloat(Double.pi / 2) + angle, 0, 0, 1)
+        
+        return lineContainer
+    }
+    
+    private func layerWith(size: CGSize, color: UIColor) -> CALayer {
+        let layer = CAShapeLayer()
+        var path = UIBezierPath()
+        path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: size.width, height: size.height), cornerRadius: size.width / 2)
+        layer.fillColor = color.cgColor
+        layer.backgroundColor = nil
+        layer.path = path.cgPath
+        layer.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        return layer
     }
 }
 
