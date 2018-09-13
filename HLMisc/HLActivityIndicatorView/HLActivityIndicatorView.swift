@@ -113,8 +113,8 @@ extension HLActivityIndicatorView {
                 self.isAnimating = false
                 self.setup(percent: 0.0, isAlphaOffset: false)
                 self.layer.removeAllAnimations()
-                self.delegate?.stopAnimating(activityIndicatorView: self)
                 self.topInset = 0
+                self.delegate?.stopAnimating(activityIndicatorView: self)
             })
         }
     }
