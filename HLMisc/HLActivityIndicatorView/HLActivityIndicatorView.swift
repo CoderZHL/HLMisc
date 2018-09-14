@@ -95,7 +95,7 @@ public class HLActivityIndicatorView: UIView {
     }
     
     public func stopAnimating(topInset: CGFloat = 0) {
-        if !self._isStopAnimation {
+        if !self._isStopAnimation && self.isAnimating {
             self.topInset = topInset
             self._isStopAnimation = true
         }
