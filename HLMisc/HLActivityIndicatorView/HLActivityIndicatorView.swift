@@ -15,13 +15,13 @@ public protocol HLActivityIndicatorViewDelegate: class {
 
 public class HLActivityIndicatorView: UIView {
     public weak var delegate: HLActivityIndicatorViewDelegate?
-    
+    /// 颜色
     public var color: UIColor = UIColor.white
-    
+    /// 动画状态
     public var isAnimating: Bool = false
-    
+    /// 动画时长
     public var animationDuration: CFTimeInterval = 0.8
-
+    /// 进度
     var percent: CGFloat = 1.0 {
         didSet {
             if self.isAnimating {
@@ -44,7 +44,7 @@ public class HLActivityIndicatorView: UIView {
             }
         }
     }
-    
+    /// 条块图层的alpha是否渐变
     public var isAlphaOffset: Bool = false {
         didSet {
             if self.isAlphaOffset != oldValue {
@@ -52,9 +52,9 @@ public class HLActivityIndicatorView: UIView {
             }
         }
     }
-    
+    /// 是否自动开始动画
     public var isAutoStartAnimation: Bool = true
-    
+    /// 是否停止动画
     private var _isStopAnimation: Bool = false {
         didSet {
             if _isStopAnimation {
@@ -62,17 +62,17 @@ public class HLActivityIndicatorView: UIView {
             }
         }
     }
-    
+    /// 当前进度
     private var currentPrecent: CGFloat = 0
-    
+    /// 条块数量
     private var segmentCount = 12
-    
+    /// 偏移值
     private var topInset: CGFloat = 0 {
         didSet {
             self.percent = self.calculatePercent(with: self.offsetCache)
         }
     }
-    
+    /// offset的缓存
     private var offsetCache: CGFloat = 0
     
     override public init(frame: CGRect) {
@@ -82,9 +82,7 @@ public class HLActivityIndicatorView: UIView {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    
-    
+    /// 开始动画
     public func startAnimating() {
         if self.isAnimating { return }
         self.setup(percent: 1.0, isAlphaOffset: true)
@@ -93,7 +91,7 @@ public class HLActivityIndicatorView: UIView {
         self.delegate?.startAnimating(activityIndicatorView: self)
         impactFeedback(style: .medium)
     }
-    
+    /// 停止动画
     public func stopAnimating(topInset: CGFloat = 0) {
         if !self._isStopAnimation && self.isAnimating {
             self.topInset = topInset
@@ -108,13 +106,12 @@ extension HLActivityIndicatorView {
             self.topInset = 0
             return
         }
-        if self._isStopAnimation && self.percent < 0.1 {
+        if self._isStopAnimation {
             self.topInset = 0
             self._isStopAnimation = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.isAnimating = false
-                self.setup(percent: 0.0, isAlphaOffset: false)
-                self.layer.removeAllAnimations()
+                self.layer.sublayers?.forEach({ $0.removeFromSuperlayer() })
                 self.delegate?.stopAnimating(activityIndicatorView: self)
             })
         }

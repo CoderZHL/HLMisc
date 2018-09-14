@@ -51,7 +51,11 @@ extension HLActivityIndicatorDemoViewController: HLActivityIndicatorViewDelegate
     func stopAnimating(activityIndicatorView: HLActivityIndicatorView) {
         var inset = self.scrollView.contentInset
         inset.top -= 50
-        self.scrollView.contentInset = inset
+        UIView.animate(withDuration: 0.25, animations: {
+            self.scrollView.contentInset = inset
+        }) { (_) in
+            self.scrollView.setContentOffset(self.scrollView.contentOffset, animated: false)
+        }
     }
     
     
