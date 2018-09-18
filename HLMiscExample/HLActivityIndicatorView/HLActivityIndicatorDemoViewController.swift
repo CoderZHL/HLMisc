@@ -43,7 +43,7 @@ extension HLActivityIndicatorDemoViewController: HLActivityIndicatorViewDelegate
         self.scrollView.contentInset = inset
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.indicatorView.stopAnimating(topInset: 50)
         }
     }

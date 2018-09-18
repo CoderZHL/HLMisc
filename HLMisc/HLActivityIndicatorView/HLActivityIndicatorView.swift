@@ -69,7 +69,9 @@ public class HLActivityIndicatorView: UIView {
     /// 偏移值
     private var topInset: CGFloat = 0 {
         didSet {
-            self.percent = self.calculatePercent(with: self.offsetCache)
+            if topInset != oldValue {
+                self.percent = self.calculatePercent(with: self.offsetCache)
+            }
         }
     }
     /// offset的缓存
