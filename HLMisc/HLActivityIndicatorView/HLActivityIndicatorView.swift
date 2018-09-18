@@ -69,9 +69,7 @@ public class HLActivityIndicatorView: UIView {
     /// 偏移值
     private var topInset: CGFloat = 0 {
         didSet {
-            if topInset != oldValue {
-                self.percent = self.calculatePercent(with: self.offsetCache)
-            }
+            self.percent = self.calculatePercent(with: self.offsetCache)
         }
     }
     /// offset的缓存
@@ -109,8 +107,8 @@ extension HLActivityIndicatorView {
             return
         }
         if self._isStopAnimation {
-            self.topInset = 0
             self._isStopAnimation = false
+            self.topInset = 0
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.isAnimating = false
                 self.layer.sublayers?.forEach({ $0.removeFromSuperlayer() })
