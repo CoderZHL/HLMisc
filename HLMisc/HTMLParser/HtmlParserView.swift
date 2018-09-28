@@ -216,19 +216,19 @@ public protocol HtmlParserViewDelegate: class {
 }
 
 extension HtmlParserViewDelegate {
-    func htmlParserView(_ view: HtmlParserView, imageButton: UIButton, edgenInsetsToTopView topView: UIView?) -> UIEdgeInsets {
+    public func htmlParserView(_ view: HtmlParserView, imageButton: UIButton, edgenInsetsToTopView topView: UIView?) -> UIEdgeInsets {
         return topView == nil ? UIEdgeInsets.zero : UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
     }
     
-    func htmlParserView(_ view: HtmlParserView, label: UILabel, edgenInsetsToTopView topView: UIView?) -> UIEdgeInsets {
+    public func htmlParserView(_ view: HtmlParserView, label: UILabel, edgenInsetsToTopView topView: UIView?) -> UIEdgeInsets {
         return topView == nil ? UIEdgeInsets.zero : UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
     }
     
-    func htmlParserView(_ view: HtmlParserView, attributedStringWithContent content: String, kind: HtmlTextModel.Kind) -> NSAttributedString {
+    public func htmlParserView(_ view: HtmlParserView, attributedStringWithContent content: String, kind: HtmlTextModel.Kind) -> NSAttributedString {
         return NSMutableAttributedString(string: content, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16.0)])
     }
     
-    func htmlParserView(_ view: HtmlParserView, paragraphStyleForContent content: NSAttributedString) -> NSParagraphStyle? {
+    public func htmlParserView(_ view: HtmlParserView, paragraphStyleForContent content: NSAttributedString) -> NSParagraphStyle? {
         let style = NSMutableParagraphStyle()
         style.lineSpacing = 2
         return style
