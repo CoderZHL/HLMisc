@@ -11,6 +11,8 @@ import UIKit
 open class SegmentedControl<Item>: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     public weak var collectionView: UICollectionView!
     
+    public var minItemWidth: CGFloat? = nil
+    
     public var items: [Item] = [] {
         didSet {
             self.collectionView.reloadData()
@@ -48,7 +50,10 @@ open class SegmentedControl<Item>: NSObject, UICollectionViewDataSource, UIColle
         let itemSpacing = self.collectionView(collectionView, layout: collectionViewLayout, minimumInteritemSpacingForSectionAt: indexPath.section)
         let insets = self.collectionView(collectionView, layout: collectionViewLayout, insetForSectionAt: indexPath.section)
         let colums: CGFloat = CGFloat(self.items.count)
-        let width = (collectionView.bounds.size.width - insets.left - insets.right - (colums - 1) * itemSpacing) / colums
+        var width = (collectionView.bounds.size.width - insets.left - insets.right - (colums - 1) * itemSpacing) / colums
+        if let minWidth = self.minItemWidth {
+            width = max(width, minWidth)
+        }
         return CGSize(width: width, height: collectionView.bounds.size.height)
     }
     
